@@ -55,15 +55,16 @@
             background: #b37a06;
         }
         #imageContainer {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(18%, 1fr));
+            gap: 10px;
             justify-content: center;
             margin-top: 20px;
+            padding: 10px;
         }
         .image-box {
-            width: 90%;
-            height: 10vh;
-            margin: 5px;
+            width: 100%;
+            aspect-ratio: 1 / 1;
             overflow: hidden;
             position: relative;
         }
