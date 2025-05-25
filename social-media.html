@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        *:hover {
+            color: #da7604 !important;
+            transition: color 0.15s;
+        }
+    </style>
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh; margin: 0; overflow: hidden;">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="social-media.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <img src="/src/assets/image/background.gif" 
+         alt="Background GIF" 
+         style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: 0; pointer-events: none; opacity: 0.4; filter: blur(6px);">
+    <main style="position: relative; flex: 1 0 auto; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh;">
+        <section style="background: rgba(255,255,255,0.85); border-radius: 18px; padding: 24px 10px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); text-align: center; border: none; display: flex; flex-direction: column; align-items: center; width: 340px; min-width: 0; max-width: 95vw; position: relative; color: #da7604;">
+            <div style="position: relative; display: inline-block;">
+                <h2 style="text-align: center; color: #da7604; display: inline-block; position: relative; z-index: 2;">
+                    Connect with Me
+                </h2>
+                <img src="/src/assets/image/9032_Senko_happy_nosies.png"
+                     alt="Senko-san"
+                     style="position: absolute; left: 100%; top: 9%; width: 28%; height: auto; transform: translate(-50%,-50%) rotate(20deg); z-index: 3; opacity: 1; pointer-events: none;">
+            </div>
+            <div style="margin-top: 24px;">
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 18px; text-align: center;">
+                    <li><a href="https://www.facebook.com/yourprofile" target="_blank" style="color: #da7604;">Facebook</a></li>
+                    <li><a href="https://www.behance.net/yourprofile" target="_blank" style="color: #da7604;">Behance</a></li>
+                    <li><a href="https://www.deviantart.com/yourprofile" target="_blank" style="color: #da7604;">DeviantArt</a></li>
+                    <li><a href="https://discord.com/users/yourprofile" target="_blank" style="color: #da7604;">Discord</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer style="position: relative; z-index: 1; flex-shrink: 0; text-align: center; background: transparent;">
+        <p>&copy;<span id="year"></span>senchan</p>
+    </footer>
+    <audio id="click-audio" src="/src/assets/sound/click.mp3" preload="auto"></audio>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        document.querySelectorAll('ul a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const audio = document.getElementById('click-audio');
+                if (audio) {
+                    audio.currentTime = 0;
+                    audio.play();
+                }
+               
+            });
+        });
+    </script>
+</body>
+</html>

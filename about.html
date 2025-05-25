@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">
+    <title>About Me</title>
+    <style>
+        *:hover {
+            color: #da7604 !important;
+            transition: color 0.15s;
+        }
+    </style>
+</head>
+<body style="display: flex; flex-direction: column; min-height: 100vh; margin: 0; overflow: hidden;">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="social-media.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <img src="/src/assets/image/background2.gif" 
+         alt="Background GIF" 
+         style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: 0; pointer-events: none; opacity: 0.4; filter: blur(6px);">
+    <main style="position: relative; flex: 1 0 auto; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh;">
+        <section style="background: rgba(255,255,255,0.85); border-radius: 18px; padding: 32px 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); text-align: center; border: none; display: inline-block; width: fit-content; height: fit-content; min-width: 0; max-width: 100%; position: relative;">
+            <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                <h2 style="color: #da7604; margin-bottom: 18px; display: inline-block; position: relative; z-index: 2; margin: 0;">
+                    About me
+                </h2>
+                <img src="/src/assets/image/sengu1.png"
+                     alt="Sengu"
+                     style="position: relative; margin-left: 8px; width: 30px; height: auto; transform: none; z-index: 3; opacity: 1; pointer-events: none; vertical-align: middle;">
+            </div>
+            <div style="margin-top: 24px;">
+                <ul style="text-align: left; margin: 0; padding-left: 1.2em; display: inline-block;">
+                    <li style="margin-bottom: 12px;"><b>Fullname:</b> Hoàng Kim Sang</li>
+                    <li style="margin-bottom: 12px;"><b>Birthday:</b> 10/07</li>
+                    <li style="margin-bottom: 12px;"><b>Birthplace:</b> Ha Noi</li>
+                    <li style="margin-bottom: 0;"><b>Hobby:</b> playing hoyogame, taking photo, and build pc</li>
+                </ul>
+                <div style="margin-top: 19px; display: flex; justify-content: center;">
+                    <img src="/src/assets/image/gif1.gif" alt="gif1" style="width: 60%; max-width: 350px; height: auto; border-radius: 10px; display: block;">
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer style="position: relative; z-index: 1; flex-shrink: 0; text-align: center; background: transparent;">
+        <p>&copy;<span id="year"></span>senchan</p>
+    </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

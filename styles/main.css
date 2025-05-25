@@ -1,0 +1,124 @@
+body {
+    font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #35424a; 
+    overflow-x: hidden; /* Ẩn thanh cuộn ngang */
+}
+
+header {
+    background: #ffffff;
+    color: #35424a;
+    padding: 10px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+nav {
+    background: #ffffff;
+    padding: 10px 0;
+}
+
+nav a {
+    color: #35424a;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li {
+    margin-bottom: 0; 
+    margin-right: 20px; 
+}
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+section {
+    min-height: 70vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 20px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    text-align: center; 
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #ffffff; 
+    color: #35424a;      
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.senko-fall {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 50px; 
+    height: 50px;
+    background-image: url('/src/assets/image/Daco_5413489.png'); 
+    background-size: cover;
+    animation: fall linear infinite;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+#date-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#gregorian-date {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.5em;
+    color: #222;
+}
+
+#lunar-date {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.2em;
+    color: #555;
+}
