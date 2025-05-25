@@ -49,6 +49,27 @@
             </div>
         </div>
     </main>
+        <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('gregorian-date').textContent = now.toLocaleDateString(undefined, options);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+        }
+
+        updateDate();
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
     <footer style="position: relative; z-index: 1; flex-shrink: 0; text-align: center; background: transparent;">
         <p>&copy;<span id="year"></span>senchan</p>
     </footer>
