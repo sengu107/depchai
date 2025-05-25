@@ -43,38 +43,49 @@
                 </div>
             </div>
             <div id="pixel-clock" style="text-align: center;">
-                <div id="clock" style="font-family: 'Roboto Mono', monospace; font-size: 1.25em; color: #222; letter-spacing: 0.05em; background: #fff; border-radius: 16px; display: inline-block; padding: 6px 14px;">
+                <div id="clock" style="font-family: 'Roboto Mono', monospace; font-size: 1.25em; color: #222; letter-spacing: 0.05em; background: #fff; border-radius: 16px; display: inline-block; padding: 4px 18px; box-shadow: 0 2px 12px #ffe6ab;">
                     00:00:00
                 </div>
             </div>
         </div>
     </main>
-        <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        function updateDate() {
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('gregorian-date').textContent = now.toLocaleDateString(undefined, options);
-        }
-
-        function updateClock() {
-            const now = new Date();
-            const h = String(now.getHours()).padStart(2, '0');
-            const m = String(now.getMinutes()).padStart(2, '0');
-            const s = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
-        }
-
-        updateDate();
-        updateClock();
-        setInterval(updateClock, 1000);
-    </script>
     <footer style="position: relative; z-index: 1; flex-shrink: 0; text-align: center; background: transparent;">
-        <p>&copy;<span id="year"></span>senchan</p>
+        <p>&copy;<span id="year"></span> senchan</p>
     </footer>
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', function () {
+            // Cập nhật năm
+            const yearSpan = document.getElementById('year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+
+            // Hàm cập nhật ngày
+            function updateDate() {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const dateElem = document.getElementById('gregorian-date');
+                if (dateElem) {
+                    dateElem.textContent = now.toLocaleDateString(undefined, options);
+                }
+            }
+
+            // Hàm cập nhật đồng hồ
+            function updateClock() {
+                const now = new Date();
+                const h = String(now.getHours()).padStart(2, '0');
+                const m = String(now.getMinutes()).padStart(2, '0');
+                const s = String(now.getSeconds()).padStart(2, '0');
+                const clockElem = document.getElementById('clock');
+                if (clockElem) {
+                    clockElem.textContent = `${h}:${m}:${s}`;
+                }
+            }
+
+            updateDate();
+            updateClock();
+            setInterval(updateClock, 1000);
+        });
     </script>
     <script src="/src/scripts/main.js"></script>
 </body>
