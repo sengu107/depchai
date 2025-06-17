@@ -249,7 +249,7 @@
         <br>
         <span class="welcome-text" id="welcome"></span>
     </div>
-    <div class="main-glass">
+    <div class="main-glass" style="width:auto; min-width:340px; display:flex; flex-direction:row; align-items:center; justify-content:center; gap:32px;">
         <div class="left-col">
             <div class="clock-glass">
                 <div class="clock-time" id="clock-time">12:00:00</div>
@@ -259,18 +259,14 @@
                 <img class="anime-img" src="src/assets/image/uwu-anime.gif" alt="Anime">
             </div>
         </div>
-        <div class="right-col weather-widget">
-            <div class="weather-header">
-                <span class="weather-location-icon"><i class="fa-solid fa-location-dot"></i></span>
-                <span class="weather-city">HANOI</span>
+        <div id="weather-widget-simple" style="background:rgba(255,255,255,0.25); border-radius:14px; padding:18px 22px; min-width:140px; text-align:center; font-family:inherit; box-shadow:0 2px 8px rgba(0,0,0,0.07); display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <div style="font-weight:600; margin-bottom:4px; font-size:1.1rem; display:flex; align-items:center; gap:6px;">
+                <span style="color:#f1690e;"><i class="fa-solid fa-location-dot"></i></span>
+                <span>Hà Nội</span>
             </div>
-            <div class="weather-main">
-                <div class="weather-temp" id="weather-temp">28°C</div>
-                <div class="weather-icon" id="weather-icon">
-                    <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="weather" style="width:32px;height:32px;">
-                </div>
-            </div>
-            <div class="weather-desc" id="weather-desc">Sunny</div>
+            <div id="simple-weather-icon" style="margin-bottom:6px; font-size:2rem;"></div>
+            <div id="simple-weather-temp" style="font-size:1.6rem; font-weight:bold; margin:6px 0;">--°C</div>
+            <div id="simple-weather-status" style="font-size:1rem; color:#333;">Loading...</div>
         </div>
     </div>
     <footer>
@@ -295,12 +291,6 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-      
-        document.getElementById('weather-temp').textContent = '28°C';
-        document.getElementById('weather-desc').textContent = 'Sunny';
-        document.getElementById('weather-icon').innerHTML = '<img src="https://openweathermap.org/img/wn/01d@2x.png" alt="weather" style="width:32px;height:32px;">';
-
-        
         const typingText = "HI, Im SenChan";
         const welcomeText = "welcome to my profile";
         let typingIndex = 0;
@@ -322,6 +312,78 @@
             }
         }
         typeEffect();
+
+        // Weather widget sử dụng open-meteo.com (dữ liệu thật, Hà Nội)
+        function getWeatherIcon(code) {
+            // Open-Meteo weather_code mapping
+            if (code === 0) return '<i class="fa-solid fa-sun" style="color:#f7c948"></i>'; // Clear
+            if (code === 1) return '<i class="fa-regular fa-sun" style="color:#f7c948"></i>'; // Mainly clear
+            if (code === 2) return '<i class="fa-solid fa-cloud-sun" style="color:#f7c948"></i>'; // Partly cloudy
+            if (code === 3) return '<i class="fa-solid fa-cloud" style="color:#b0b0b0"></i>'; // Overcast
+            if (code === 45 || code === 48) return '<i class="fa-solid fa-smog" style="color:#b0b0b0"></i>'; // Fog
+            if (code >= 51 && code <= 67) return '<i class="fa-solid fa-cloud-rain" style="color:#4a90e2"></i>'; // Drizzle
+            if (code >= 71 && code <= 77) return '<i class="fa-solid fa-snowflake" style="color:#b3e0ff"></i>'; // Snow
+            if (code >= 80 && code <= 82) return '<i class="fa-solid fa-cloud-showers-heavy" style="color:#4a90e2"></i>'; // Rain showers
+            if (code >= 95 && code <= 99) return '<i class="fa-solid fa-bolt" style="color:#f5b041"></i>'; // Thunderstorm
+            return '<i class="fa-solid fa-question" style="color:#888"></i>'; // Unknown
+        }
+
+        function fetchSimpleWeather() {
+            fetch('https://api.open-meteo.com/v1/forecast?latitude=21.0285&longitude=105.8542&hourly=temperature_2m,weather_code&current=temperature_2m&minutely_15=temperature_2m&timezone=Asia%2FBangkok&forecast_days=1')
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Open-Meteo API data:", data); // Thêm dòng này để kiểm tra dữ liệu trả về
+                    // Lấy nhiệt độ hiện tại
+                    let temp = "--";
+                    let iconHtml = "";
+                    let code = null;
+                    if (data.current && typeof data.current.temperature_2m !== "undefined") {
+                        temp = data.current.temperature_2m;
+                    }
+                    // Lấy trạng thái thời tiết từ weather_code tại giờ hiện tại
+                    let status = "Unknown";
+                    if (data.hourly && data.hourly.time && data.hourly.weather_code) {
+                        // Lấy giờ hiện tại theo Asia/Bangkok (UTC+7)
+                        const now = new Date();
+                        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+                        const bangkok = new Date(utc + (7 * 60 * 60000));
+                        const yyyy = bangkok.getFullYear();
+                        const mm = String(bangkok.getMonth() + 1).padStart(2, '0');
+                        const dd = String(bangkok.getDate()).padStart(2, '0');
+                        const HH = String(bangkok.getHours()).padStart(2, '0');
+                        const hourStr = `${yyyy}-${mm}-${dd}T${HH}:00`;
+
+                        const idx = data.hourly.time.indexOf(hourStr);
+                        if (idx !== -1) {
+                            code = data.hourly.weather_code[idx];
+                            iconHtml = getWeatherIcon(code);
+                            if (code === 0) status = "Clear";
+                            else if (code === 1) status = "Mainly clear";
+                            else if (code === 2) status = "Partly cloudy";
+                            else if (code === 3) status = "Overcast";
+                            else if (code === 45 || code === 48) status = "Fog";
+                            else if (code >= 51 && code <= 67) status = "Drizzle";
+                            else if (code >= 71 && code <= 77) status = "Snow";
+                            else if (code >= 80 && code <= 82) status = "Rain showers";
+                            else if (code >= 95 && code <= 99) status = "Thunderstorm";
+                            else status = "Other";
+                        } else {
+                            status = "No data for: " + hourStr;
+                            iconHtml = getWeatherIcon(null);
+                        }
+                    }
+                    document.getElementById('simple-weather-temp').textContent = temp + "°C";
+                    document.getElementById('simple-weather-status').textContent = status;
+                    document.getElementById('simple-weather-icon').innerHTML = iconHtml;
+                })
+                .catch(() => {
+                    document.getElementById('simple-weather-temp').textContent = "--°C";
+                    document.getElementById('simple-weather-status').textContent = "Unavailable";
+                    document.getElementById('simple-weather-icon').innerHTML = getWeatherIcon(null);
+                });
+        }
+        fetchSimpleWeather();
+        setInterval(fetchSimpleWeather, 600000); // cập nhật mỗi 10 phút
     </script>
 </body>
 </html>
