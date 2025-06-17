@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/social-media.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Social Media</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="device.html">Device</a></li>
+                <li><a href="social-media.html">Social Media</a></li>
+            </ul>
+        </nav>
+    </header>
+    <img src="/src/assets/image/background.gif" alt="Background GIF" class="background">
+    <main>
+        <section class="social-container">
+            <div class="social-header">
+                <h2>Connect with Me</h2>
+                <img src="/src/assets/image/9032_Senko_happy_nosies.png" alt="Senko-san" class="social-mascot">
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/sanghoang107/" target="_blank" class="social-link">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://www.behance.net/hngkmsng" target="_blank" class="social-link">
+                    <i class="fab fa-behance"></i>
+                    <span>Behance</span>
+                </a>
+                <a href="https://www.deviantart.com/senchanxinhxan" target="_blank" class="social-link">
+                    <i class="fab fa-deviantart"></i>
+                    <span>DeviantArt</span>
+                </a>
+                <a href="https://discord.com/users/541924125858463754" target="_blank" class="social-link">
+                    <i class="fab fa-discord"></i>
+                    <span>Discord</span>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy;<span id="year"></span>senchan</p>
+    </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

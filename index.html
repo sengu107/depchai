@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sieudepchai</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/weather.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('src/assets/image/background1.gif') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .background-blur-glass {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .background-blur-white {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            background: rgba(252, 252, 252, 0.342);
+            backdrop-filter: blur(2.5px);
+            -webkit-backdrop-filter: blur(2.5px);
+        }
+        .main-glass {
+            width: 229px;
+            padding: 20px 26px; 
+            border-radius: 22px;
+            box-shadow: 0 4px 16px 0 rgba(31,38,135,0.13);
+            gap: 18px;
+            background: rgba(163, 163, 163, 0.25);
+            display: flex;
+            margin: 200px auto 0 auto;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(255, 255, 255, 0.308);
+            justify-content: center; 
+            align-items: flex-start;
+        }
+        .left-col { gap: 10px; display: flex; flex-direction: column; }
+        .clock-glass { border-radius: 14px; padding: 6px 8px 4px 8px; margin-bottom: 6px; background: rgba(255, 255, 255, 0.308); display: flex; flex-direction: column; align-items: center;}
+        .clock-time { font-size: 1.2rem; margin-bottom: 7px; font-weight: bold;}
+        .clock-date {
+            font-size: 0.75rem;
+            text-align: center;
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .anime-glass { 
+            border-radius: 10px; 
+            padding: 0px; 
+            background: rgba(255, 255, 255, 0.308);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .anime-img { 
+            width: 80px; 
+            height: 100px; 
+            scale:0.9;
+            border-radius: 6px; 
+            object-fit: cover;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .right-col.weather-widget {
+            margin-left: 12px;
+            margin-right: 0;
+            align-items: center;
+            justify-content: center;
+            min-width: 110px;
+            padding: 10px 14px 10px 14px;
+            gap: 6px;
+        }
+        .weather-widget {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.308) 100%);
+            border-radius: 22px;
+            padding: 14px 22px 14px 22px;
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            box-sizing: border-box;
+            backdrop-filter: blur(18px) saturate(140%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+            position: relative;
+            overflow: hidden;
+        }
+        .weather-widget::before {
+            content: "";
+            position: absolute;
+            left: 10%;
+            top: -30%;
+            width: 80%;
+            height: 60%;
+            background: linear-gradient(120deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.05) 100%);
+            filter: blur(8px);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .weather-widget::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 60%;
+            height: 30%;
+            background: linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.01) 100%);
+            filter: blur(6px);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .weather-header,
+        .weather-main,
+        .weather-desc {
+            position: relative;
+            z-index: 2;
+        }
+        .weather-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 2px;
+            letter-spacing: 0.04em;
+            justify-content: center;
+            width: 100%;
+        }
+        .weather-location-icon {
+            font-size: 1.1rem;
+        }
+        .weather-main {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 2px;
+            justify-content: center;
+            width: 100%;
+        }
+        .weather-temp {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f1690e;
+            margin-bottom: 0;
+        }
+        .weather-icon img {
+            display: block;
+            width: 32px;
+            height: 32px;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.26));
+        }
+        .weather-desc {
+            font-size: 0.95rem;
+            color: #000000;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            margin-top: 0;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            text-align: center;
+            width: 100%;
+        }
+        .typing-effect {
+            font-size: 48px;
+            font-weight: bold;
+            color: #111;
+            letter-spacing: 0.04em;
+            font-family: inherit;
+            white-space: pre;
+            text-align: center;
+            background: transparent;
+            margin-bottom: 18px;
+            min-height: 2.2em;
+        }
+        nav.navbar {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            z-index:100;
+            background: rgba(255, 255, 255, 0.13);
+            box-shadow: 0 2px 8px rgba(31,38,135,0.06);
+            display: flex;
+            justify-content: center;
+        }
+        nav.navbar ul {
+            margin: 0;
+            padding: 0 48px 0 0;
+            list-style: none;
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            height: 48px;
+            justify-content: center;
+        }
+        nav.navbar li {
+            display: inline-block;
+        }
+        nav.navbar a {
+            color: #222;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0 8px;
+            transition: color 0.2s;
+        }
+        nav.navbar a:hover {
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blur-glass"></div>
+    <div class="background-blur-white"></div>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="device.html">Device</a></li>
+            <li><a href="social-media.html">Social Media</a></li>
+        </ul>
+    </nav>
+    <div style="position: absolute; top: 110px; left: 0; width: 100%; text-align: center; z-index: 20;">
+        <span class="typing-effect" id="typing"></span>
+        <br>
+        <span class="welcome-text" id="welcome"></span>
+    </div>
+    <div class="main-glass">
+        <div class="left-col">
+            <div class="clock-glass">
+                <div class="clock-time" id="clock-time">12:00:00</div>
+                <div class="clock-date" id="clock-date">Tuesday<br>June 17, 2025</div>
+            </div>
+            <div class="anime-glass">
+                <img class="anime-img" src="/src/assets/image/uwu-anime.gif" alt="Anime">
+            </div>
+        </div>
+        <div class="right-col weather-widget">
+            <div class="weather-header">
+                <span class="weather-location-icon"><i class="fa-solid fa-location-dot"></i></span>
+                <span class="weather-city">HANOI</span>
+            </div>
+            <div class="weather-main">
+                <div class="weather-temp" id="weather-temp">28°C</div>
+                <div class="weather-icon" id="weather-icon">
+                    <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="weather" style="width:32px;height:32px;">
+                </div>
+            </div>
+            <div class="weather-desc" id="weather-desc">Sunny</div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy;<span id="year"></span>senchan</p>
+    </footer>
+    <script>
+        
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock-time').textContent = `${h}:${m}:${s}`;
+            const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+            const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            const day = days[now.getDay()];
+            const date = now.getDate();
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+            document.getElementById('clock-date').innerHTML = `${day},<br>${month} ${date}, ${year}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+      
+        document.getElementById('weather-temp').textContent = '28°C';
+        document.getElementById('weather-desc').textContent = 'Sunny';
+        document.getElementById('weather-icon').innerHTML = '<img src="https://openweathermap.org/img/wn/01d@2x.png" alt="weather" style="width:32px;height:32px;">';
+
+        
+        const typingText = "HI, Im SenChan";
+        const welcomeText = "welcome to my profile";
+        let typingIndex = 0;
+        let welcomeIndex = 0;
+        function typeEffect() {
+            if (typingIndex <= typingText.length) {
+                document.getElementById('typing').textContent = typingText.slice(0, typingIndex);
+                typingIndex++;
+                setTimeout(typeEffect, 80);
+            } else {
+                typeWelcome();
+            }
+        }
+        function typeWelcome() {
+            if (welcomeIndex <= welcomeText.length) {
+                document.getElementById('welcome').textContent = welcomeText.slice(0, welcomeIndex);
+                welcomeIndex++;
+                setTimeout(typeWelcome, 50);
+            }
+        }
+        typeEffect();
+    </script>
+</body>
+</html>
