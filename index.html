@@ -329,92 +329,67 @@
         }
 
         function fetchSimpleWeather() {
-            fetch('https://api.open-meteo.com/v1/forecast?latitude=21.0285&longitude=105.8542&hourly=temperature_2m,weather_code&current=temperature_2m&minutely_15=temperature_2m&timezone=Asia%2FBangkok&forecast_days=1')
+            fetch('https://api.open-meteo.com/v1/forecast?latitude=21.0285&longitude=105.8542&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code&timezone=Asia%2FBangkok&forecast_days=1')
                 .then(res => res.json())
                 .then(data => {
-                    console.log("Open-Meteo API data:", data); // Thêm dòng này để kiểm tra dữ liệu trả về
-                    // Lấy nhiệt độ hiện tại
+                    console.log("API Response:", data);
                     let temp = "--";
-                    let iconHtml = "";
+                    let status = "Đang tải...";
                     let code = null;
-                    if (data.current && typeof data.current.temperature_2m !== "undefined") {
-                        temp = data.current.temperature_2m;
-                    }
-                    // Lấy trạng thái thời tiết từ weather_code tại giờ hiện tại
-                    let status = "Unknown";
-                    if (data.hourly && data.hourly.time && data.hourly.weather_code) {
-                        // Lấy giờ hiện tại theo Asia/Bangkok (UTC+7)
-                        const now = new Date();
-                        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-                        const bangkok = new Date(utc + (7 * 60 * 60000));
-                        const yyyy = bangkok.getFullYear();
-                        const mm = String(bangkok.getMonth() + 1).padStart(2, '0');
-                        const dd = String(bangkok.getDate()).padStart(2, '0');
-                        const HH = String(bangkok.getHours()).padStart(2, '0');
-                        const hourStr = `${yyyy}-${mm}-${dd}T${HH}:00`;
 
-                        const idx = data.hourly.time.indexOf(hourStr);
-                        if (idx !== -1) {
-                            code = data.hourly.weather_code[idx];
-                            iconHtml = getWeatherIcon(code);
-                            if (code === 0) status = "Clear";
-                            else if (code === 1) status = "Mainly clear";
-                            else if (code === 2) status = "Partly cloudy";
-                            else if (code === 3) status = "Overcast";
-                            else if (code === 45 || code === 48) status = "Fog";
-                            else if (code >= 51 && code <= 67) status = "Drizzle";
-                            else if (code >= 71 && code <= 77) status = "Snow";
-                            else if (code >= 80 && code <= 82) status = "Rain showers";
-                            else if (code >= 95 && code <= 99) status = "Thunderstorm";
-                            else status = "Other";
-                        } else {
-                            status = "No data for: " + hourStr;
-                            iconHtml = getWeatherIcon(null);
-                        }
+                    if (data.current) {
+                        temp = data.current.temperature_2m;
+                        code = data.current.weather_code;
+                        console.log("Weather code:", code);
+                        
+                        // Định nghĩa weather_codes_vi trong JavaScript
+                        const weather_codes_vi = {
+                            0: "Trời quang đãng",
+                            1: "Chủ yếu trời quang",
+                            2: "Có mây rải rác",
+                            3: "Nhiều mây",
+                            45: "Sương mù",
+                            48: "Sương mù đóng băng",
+                            51: "Mưa phùn nhẹ",
+                            53: "Mưa phùn vừa",
+                            55: "Mưa phùn dày",
+                            56: "Mưa phùn đóng băng nhẹ",
+                            57: "Mưa phùn đóng băng dày",
+                            61: "Mưa nhẹ",
+                            63: "Mưa vừa",
+                            65: "Mưa lớn",
+                            66: "Mưa đóng băng nhẹ",
+                            67: "Mưa đóng băng nặng",
+                            71: "Tuyết rơi nhẹ",
+                            73: "Tuyết rơi vừa",
+                            75: "Tuyết rơi dày",
+                            77: "Tuyết hạt nhỏ",
+                            80: "Mưa rào nhẹ",
+                            81: "Mưa rào vừa",
+                            82: "Mưa rào lớn",
+                            85: "Mưa tuyết nhẹ",
+                            86: "Mưa tuyết nặng",
+                            95: "Dông nhẹ hoặc vừa",
+                            96: "Dông kèm mưa đá nhẹ",
+                            99: "Dông kèm mưa đá nặng"
+                        };
+                        
+                        status = weather_codes_vi[code] || "Không xác định";
                     }
+
                     document.getElementById('simple-weather-temp').textContent = temp + "°C";
                     document.getElementById('simple-weather-status').textContent = status;
-                    document.getElementById('simple-weather-icon').innerHTML = iconHtml;
+                    document.getElementById('simple-weather-icon').innerHTML = getWeatherIcon(code);
                 })
-                .catch(() => {
+                .catch(err => {
+                    console.error("Weather API Error:", err);
                     document.getElementById('simple-weather-temp').textContent = "--°C";
-                    document.getElementById('simple-weather-status').textContent = "Unavailable";
+                    document.getElementById('simple-weather-status').textContent = "Không lấy được dữ liệu";
                     document.getElementById('simple-weather-icon').innerHTML = getWeatherIcon(null);
                 });
         }
         fetchSimpleWeather();
         setInterval(fetchSimpleWeather, 600000); // cập nhật mỗi 10 phút
-
-        weather_codes_vi = {
-            0: "Trời quang đãng",
-            1: "Chủ yếu trời quang",
-            2: "Có mây rải rác",
-            3: "Nhiều mây",
-            45: "Sương mù",
-            48: "Sương mù đóng băng",
-            51: "Mưa phùn nhẹ",
-            53: "Mưa phùn vừa",
-            55: "Mưa phùn dày",
-            56: "Mưa phùn đóng băng nhẹ",
-            57: "Mưa phùn đóng băng dày",
-            61: "Mưa nhẹ",
-            63: "Mưa vừa",
-            65: "Mưa lớn",
-            66: "Mưa đóng băng nhẹ",
-            67: "Mưa đóng băng nặng",
-            71: "Tuyết rơi nhẹ",
-            73: "Tuyết rơi vừa",
-            75: "Tuyết rơi dày",
-            77: "Tuyết hạt nhỏ",
-            80: "Mưa rào nhẹ",
-            81: "Mưa rào vừa",
-            82: "Mưa rào lớn",
-            85: "Mưa tuyết nhẹ",
-            86: "Mưa tuyết nặng",
-            95: "Dông nhẹ hoặc vừa",
-            96: "Dông kèm mưa đá nhẹ",
-            99: "Dông kèm mưa đá nặng"
-}
     </script>
 </body>
 </html>

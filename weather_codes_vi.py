@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+
+weather_codes_vi = {
+    0: "Trời quang đãng",
+    1: "Chủ yếu trời quang",
+    2: "Có mây rải rác",
+    3: "Nhiều mây",
+    45: "Sương mù",
+    48: "Sương mù đóng băng",
+    51: "Mưa phùn nhẹ",
+    53: "Mưa phùn vừa",
+    55: "Mưa phùn dày",
+    56: "Mưa phùn đóng băng nhẹ",
+    57: "Mưa phùn đóng băng dày",
+    61: "Mưa nhẹ",
+    63: "Mưa vừa",
+    65: "Mưa lớn",
+    66: "Mưa đóng băng nhẹ",
+    67: "Mưa đóng băng nặng",
+    71: "Tuyết rơi nhẹ",
+    73: "Tuyết rơi vừa",
+    75: "Tuyết rơi dày",
+    77: "Tuyết hạt nhỏ",
+    80: "Mưa rào nhẹ",
+    81: "Mưa rào vừa",
+    82: "Mưa rào lớn",
+    85: "Mưa tuyết nhẹ",
+    86: "Mưa tuyết nặng",
+    95: "Dông nhẹ hoặc vừa",
+    96: "Dông kèm mưa đá nhẹ",
+    99: "Dông kèm mưa đá nặng"
+}
