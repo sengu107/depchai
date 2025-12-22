@@ -387,29 +387,7 @@
         <p>&copy;<span id="year"></span>senchan</p>
     </footer>
     <script>
-        const lunarCalendar = {
-            months: ['Giêng', 'Hai', 'Ba', 'Tư', 'Năm', 'Sáu', 'Bảy', 'Tám', 'Chín', 'Mười', 'Một', 'Chạp'],
-            
-            getLunarDate(dd, mm, yy) {
-                const lunar = new Date(yy, mm - 1, dd);
-                lunar.setDate(lunar.getDate() - 11);
-                return {
-                    day: lunar.getDate(),
-                    month: lunar.getMonth()
-                };
-            },
-
-            formatLunar(date) {
-                const lunar = this.getLunarDate(
-                    date.getDate(),
-                    date.getMonth() + 1,
-                    date.getFullYear()
-                );
-                return `Mùng ${lunar.day} tháng ${this.months[lunar.month]}`;
-            }
-        };
-
-        const weather_codes_vi = {
+      const weather_codes_vi = {
             0: "Trời quang đãng",
             1: "Chủ yếu trời quang",
             2: "Có mây rải rác", 
