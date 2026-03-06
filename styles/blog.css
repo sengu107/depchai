@@ -1,0 +1,12 @@
+
+.card h3{margin-bottom:8px}
+
+/* grouped posts layout: date column + posts column */
+.post-group{display:grid;grid-template-columns:130px 1fr;gap:6px 18px;align-items:center;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.03)}
+.post-group:last-child{border-bottom:0}
+.post-group .date{text-align:right;font-weight:700;padding-right:16px;color:#111;align-self:center}
+.post-group .posts{list-style:none;margin:0;padding:0}
+.post-group .posts li{margin:6px 0}
+
+.post-group .posts a{display:block;text-decoration:none;font-family:'Courier New', Courier, monospace;color:var(--accent);padding:2px 0}
+.post-group .posts a:hover{color:#d35400;transition:color .18s}

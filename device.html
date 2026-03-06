@@ -1,185 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Device - Personal Biography</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/device.css">
-    <style>
-        .device-main {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 24px 8px;
-            margin-top: 96px;
-            box-sizing: border-box;
-        }
-        .device-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-            justify-content: center;
-            box-sizing: border-box;
-        }
-        .glass-card {
-            min-width: 220px;
-            max-width: 320px;
-            flex: 1 1 220px;
-            margin: 0 8px;
-            padding: 16px;
-            box-sizing: border-box;
-        }
-        .device-title {
-            text-align: center;
-            font-size: 2rem;
-        }
-        .device-description {
-            text-align: center;
-            margin-bottom: 18px;
-        }
-        @media (max-width: 900px) {
-            .device-main {
-                max-width: 100%;
-                padding: 16px 4px;
-            }
-            .device-grid {
-                gap: 12px;
-            }
-        }
-        @media (max-width: 700px) {
-            .device-grid {
-                flex-direction: column;
-                flex-wrap: nowrap;
-                gap: 16px;
-                align-items: stretch;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            .glass-card {
-                min-width: 0;
-                max-width: 90vw;
-                width: 90vw;
-                flex: 0 0 auto !important; /* Đảm bảo không bị ảnh hưởng bởi flex ở desktop */
-                flex-basis: auto !important;
-                flex-grow: 0 !important;
-                flex-shrink: 0 !important;
-                margin: 0 0 8px 0; /* Sát lề trái/phải, không căn giữa */
-                box-sizing: border-box;
-                word-break: break-word;
-                overflow-wrap: break-word;
-                padding: 8px;
-                font-size: 0.92rem;
-            }
-            .device-title {
-                font-size: 1.5rem;
-            }
-            html, body {
-                scroll-behavior: smooth;
-                -webkit-overflow-scrolling: touch;
-            }
-        }
-        @media (max-width: 480px) {
-            .device-main {
-                padding: 8px 2vw;
-            }
-            .glass-card {
-                padding: 6px;
-                font-size: 0.88rem;
-                min-width: 0;
-                max-width: 96vw;
-                width: 96vw;
-                box-sizing: border-box;
-            }
-            .device-title {
-                font-size: 1.1rem;
-            }
-        }
-        @media (max-width: 700px) {
-            .device-grid::-webkit-scrollbar {
-                display: none;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Device — SenChan</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/device.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Me</a></li>
-                <li><a href="device.html">Device</a></li>
-                <li><a href="social-media.html">Social Media</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header class="site-header">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="device.html" aria-current="page">Device</a>
+      <a href="social-media.html">Social</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+  </header>
 
-    <img src="src/assets/image/background3.gif" alt="Background GIF" class="background-image">
-    
-    <main class="device-main">
-        <h2 id="typing-device-title" class="device-title"></h2>
-        <div class="device-description">
-            <p id="typing-device-desc"></p>
-        </div>
-        
-        <div class="device-grid">
-            <div class="glass-card">
-                <span class="device-icon">🖥️</span>
-                <strong>PC</strong>
-                <p class="specs">MOBO: AB350M PRO 4 | CPU: Ryzen 5 3500 | RAM: 16GB 3200Mhz GEIL EVO SPEAR | GPU: ????? | SSD: 120GB NVME KINGSPEC | HDD: 160+320 GB | PSU: Seasonic M12ii evo 620w bronze</p>
-            </div>
+  <main class="hero">
+    <h1>Devices</h1>
+    <p class="subtitle">All devices I use for working and playing</p>
 
-            <div class="glass-card">
-                <span class="device-icon">💻</span>
-                <strong>Laptop</strong>
-                <p class="specs">LENOVO THINKPAD X1 CARBON GEN 8 | Intel Core i7-10610U | 16GB RAM | 512GB SSD NVME | 14" FHD IPS</p>
-            </div>
+    <section class="cards">
+      <article class="card">
+        <h3>ThinkPad X1 Carbon Gen 8</h3>
+        <ul>
+          <li>CPU: Intel Core i7 (10th gen)</li>
+          <li>RAM: 16GB</li>
+          <li>Storage: 512GB SSD</li>
+          <li>Display: 14" 2K</li>
+        </ul>
+      </article>
 
-            <div class="glass-card">
-                <span class="device-icon">📱</span>
-                <strong>Phone</strong>
-                <p class="specs">iPhone 8 Plus | A11 Bionic | 3GB RAM | 64GB Storage | 5.5" Retina HD | 12MP Dual Camera</p>
-            </div>
+      <article class="card">
+        <h3>iPhone 8 Plus</h3>
+        <ul>
+          <li>SoC: Apple A11 Bionic</li>
+          <li>Display: 5.5" Retina HD</li>
+          <li>RAM: 3GB</li>
+          <li>Storage: 64GB</li>
+          <li>Camera: Dual 12MP (rear), 7MP (front)</li>
+          <li>OS: iOS 16.x.x</li>
+        </ul>
+      </article>
 
-            <div class="glass-card">
-                <span class="device-icon">⌚</span>
-                <strong>Smartwatch</strong>
-                <p class="specs">Samsung Galaxy Watch 6 | 47mm | 1.5" Super AMOLED | Exynos W930 | 2GB RAM | 16GB Storage | Wear OS</p>
-            </div>
-        </div>
-    </main>
+      <article class="card">
+        <h3>Samsung Watch 6 44mm (GPS)</h3>
+        <ul>
+          <li>Size: 44mm AMOLED display</li>
+          <li>GPS: Yes (built-in)</li>
+          <li>Battery: 425 mAh</li>
+          <li>Sensors: heart rate, SpO2, accelerometer, gyroscope</li>
+          <li>Connectivity: Bluetooth, Wi‑Fi (LTE on some variants)</li>
+        </ul>
+      </article>
 
-    <footer class="device-footer">
-        <p>&copy;<span id="year"></span>senchan</p>
-    </footer>
-    
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-        const deviceTitle = "My Devices";
-        const deviceDesc = "This page will list the devices I use.";
-        const typingDeviceTitle = document.getElementById('typing-device-title');
-        const typingDeviceDesc = document.getElementById('typing-device-desc');
-        let idxTitle = 0;
-        let idxDesc = 0;
+      <article class="card">
+        <h3>PC</h3>
+        <ul>
+            <li>Updating...</li>
+        </ul>
+      </article>
+    </section>
+  </main>
 
-        function typeWriterDeviceTitle() {
-            if (idxTitle <= deviceTitle.length) {
-                typingDeviceTitle.textContent = deviceTitle.slice(0, idxTitle);
-                idxTitle++;
-                setTimeout(typeWriterDeviceTitle, 90);
-            } else {
-                setTimeout(typeWriterDeviceDesc, 300);
-            }
-        }
-        
-        function typeWriterDeviceDesc() {
-            if (idxDesc <= deviceDesc.length) {
-                typingDeviceDesc.textContent = deviceDesc.slice(0, idxDesc);
-                idxDesc++;
-                setTimeout(typeWriterDeviceDesc, 40);
-            }
-        }
-        typeWriterDeviceTitle();
-    </script>
-    <script src="/src/scripts/main.js"></script>
+  <footer class="site-footer">
+    <small>&copy; <span id="year"></span> SenChan</small>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
