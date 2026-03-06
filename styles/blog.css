@@ -9,4 +9,4 @@
 .post-group .posts li{margin:6px 0}
 
 .post-group .posts a{display:block;text-decoration:none;font-family:'Courier New', Courier, monospace;color:var(--accent);padding:2px 0}
-.post-group .posts a:hover{color:#d35400;transition:color .18s}
+.post-group .posts a:hover{color:#000000;transition:color .18s;text-shadow: rgba(23, 22, 20, 0.9) 0px 0px 19px;}

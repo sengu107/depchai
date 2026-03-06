@@ -13,6 +13,7 @@ body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica
 nav a:hover{
     color:orange;
     transition:0.5s;
+	text-shadow: rgb(247, 179, 77) 0px 0px 19px;
 }
 ::selection{background:var(--accent);color:#fff}
 ::-moz-selection{background:var(--accent);color:#fff}
