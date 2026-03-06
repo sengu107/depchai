@@ -30,15 +30,14 @@ body {
     filter: blur(8px);
 }
 
-/* Header */
 header {
     position: relative;
     z-index: 1;
 }
 
-/* Navigation */
+
 nav {
-    padding: 15px 0;
+    padding: 5px 0;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -86,7 +85,6 @@ nav ul li a:hover {
     background: transparent;
 }
 
-/* Layout */
 main {
     position: relative;
     flex: 1 0 auto;
@@ -112,8 +110,7 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 2.5rem; /* tăng khoảng cách giữa các widget */
-}
+    gap: 2.5rem; 
 
 .info-section {
     grid-area: clock;
@@ -180,7 +177,6 @@ main {
     -webkit-backdrop-filter: blur(5px);
 }
 
-/* Weather Widget */
 .weather-widget {
     width: 200px;
     padding: 15px;
@@ -461,4 +457,5 @@ nav, #clock, .content-container > div {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-5px); }
     100% { transform: translateY(0px); }
+}
 }

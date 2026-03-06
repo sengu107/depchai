@@ -328,6 +328,98 @@
             font-size: 0.6rem;
             color: #666;
         }
+
+        @media (max-width: 768px) {
+            .main-glass {
+                flex-direction: column;
+                min-width: 280px;
+                gap: 16px;
+                margin-top: 150px;
+                padding: 16px;
+            }
+            
+            .typing-effect {
+                font-size: 32px;
+            }
+            
+            .left-col {
+                width: 100%;
+            }
+            
+            .weather-widget-modern {
+                width: 100%;
+            }
+            
+            .weather-extras {
+                margin-top: 12px;
+                gap: 8px;
+            }
+            
+            nav.navbar ul {
+                padding: 0;
+                gap: 12px;
+            }
+            
+            nav.navbar a {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-glass {
+                min-width: 240px;
+                margin-top: 120px;
+                padding: 12px;
+            }
+            
+            .typing-effect {
+                font-size: 24px;
+            }
+            
+            .clock-time {
+                font-size: 1rem;
+            }
+            
+            .clock-date, .lunar-date {
+                font-size: 0.7rem;
+            }
+            
+            .weather-header-modern h2 {
+                font-size: 0.75rem;
+                margin: 0 0 2px 0;
+            }
+            
+            nav.navbar ul {
+                gap: 8px;
+            }
+            
+            nav.navbar a {
+                font-size: 0.8rem;
+                padding: 0 4px;
+            }
+            
+            .weather-extra-item {
+                padding: 6px 2px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .main-glass {
+                min-width: 200px;
+                margin-top: 100px;
+            }
+            
+            .typing-effect {
+                font-size: 20px;
+            }
+            
+            nav.navbar ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                height: auto;
+                padding: 8px 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -351,7 +443,6 @@
             <div class="clock-glass">
                 <div class="clock-time" id="clock-time">12:00:00</div>
                 <div class="clock-date" id="clock-date">Tuesday<br>June 17, 2025</div>
-                <div class="lunar-date" id="lunar-date"></div>
             </div>
             <div class="anime-glass">
                 <img class="anime-img" src="src/assets/image/uwu-anime.gif" alt="Anime">
@@ -450,7 +541,6 @@
         }
 
         const typingText = "HI, Im SenChan";
-        const welcomeText = "welcome to my profile";
         let typingIndex = 0;
         let welcomeIndex = 0;
         function typeEffect() {
