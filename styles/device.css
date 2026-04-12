@@ -1,6 +1,18 @@
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  justify-content:center;
+  padding-bottom:8px;
+  overflow-x:visible;
+}
 
+.card{
+  flex:1 1 240px;
+  max-width:320px;
+  min-width:220px;
+}
 
-.cards{gap:16px}
 .card h3{color:var(--accent);margin-bottom:6px}
 .card ul{padding-left:18px;text-align:left}
 .card p{color:var(--muted)}
